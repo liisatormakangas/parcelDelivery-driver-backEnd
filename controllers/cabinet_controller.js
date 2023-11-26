@@ -16,11 +16,11 @@ const express_1 = __importDefault(require("express"));
 const cabinet_model_1 = __importDefault(require("../models/cabinet_model"));
 const router = express_1.default.Router();
 //Get list of free cabinets for a selected locker location
-router.get('/freeCabinets/:number', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.get('/allCabinets/:number', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const lockerNumber = parseInt(req.params.number);
     try {
-        const freeCabinets = yield cabinet_model_1.default.getFreeCabinets(lockerNumber);
-        res.status(200).json(freeCabinets);
+        const cabinets = yield cabinet_model_1.default.getAllCabinets(lockerNumber);
+        res.status(200).json(cabinets);
     }
     catch (e) {
         console.error(e.message);

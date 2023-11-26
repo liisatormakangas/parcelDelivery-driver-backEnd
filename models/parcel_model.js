@@ -13,11 +13,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const dataBase_1 = __importDefault(require("../dataBase"));
-const cabinet = {
+const parcel = {
     // Get list of free cabinets for a selected locker location
-    getAllCabinets: (lockerNumber) => __awaiter(void 0, void 0, void 0, function* () {
+    getTransportedParcels: (lockerNumber) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            const query = `SELECT * FROM locker WHERE locker_number = ?`;
+            const query = `SELECT * FROM parcel WHERE desired_pickup_locker = ? AND status = 'parcel_in_transportation'`;
             const result = yield dataBase_1.default.promise().query(query, [lockerNumber]);
             return result[0];
         }
@@ -27,4 +27,4 @@ const cabinet = {
         }
     })
 };
-exports.default = cabinet;
+exports.default = parcel;

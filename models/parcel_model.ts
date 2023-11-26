@@ -1,11 +1,11 @@
 import connection from '../dataBase';
 import { RowDataPacket } from 'mysql2';
 
-const cabinet = {
+const parcel = {
     // Get list of free cabinets for a selected locker location
-    getAllCabinets: async (lockerNumber: number) => {
+    getTransportedParcels: async (lockerNumber: number) => {
         try {
-            const query = `SELECT * FROM locker WHERE locker_number = ?`;
+            const query = `SELECT * FROM parcel WHERE desired_pickup_locker = ? AND status = 'parcel_in_transportation'`;
             const result = await connection.promise().query<RowDataPacket[]>(query, [lockerNumber]);
             
             return result[0];
@@ -17,4 +17,4 @@ const cabinet = {
     }
 };
 
-export default cabinet;
+export default parcel;
