@@ -8,9 +8,9 @@ const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 //Create database connection to mysql
 const connection = mysql2_1.default.createConnection({
-    host: process.env.DB_HOST,
     user: "root",
-    database: process.env.DB_NAME,
+    host: 'localhost',
+    database: 'parcelDelivery',
     password: process.env.DB_PASSWORD,
     port: 3306
 });
