@@ -1,5 +1,5 @@
 import express from 'express';
-import parcel from '../models/parcel_model';
+import parcel from '../models/dropoff_parcel_model';
 
 const router = express.Router();
 

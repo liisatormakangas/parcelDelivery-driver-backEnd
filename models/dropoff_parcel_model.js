@@ -13,18 +13,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const dataBase_1 = __importDefault(require("../dataBase"));
-const cabinet = {
-    // Get list of free cabinets for a selected locker location
-    getAllCabinets: (lockerNumber) => __awaiter(void 0, void 0, void 0, function* () {
+const parcel = {
+    // Get list of parcels that need to deliver to desired locker or alternative locker by driver
+    getTransportedParcels: (lockerNumber) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            const query = `SELECT * FROM locker WHERE locker_number = ?`;
-            const result = yield dataBase_1.default.promise().query(query, [lockerNumber]);
-            return result[0];
+            const query = `SELECT id_parcel
+             FROM parcel 
+             WHERE 
+                    CASE
+                        WHEN alternative_pickup_locker IS NULL THEN desired_pickup_locker
+                        ELSE alternative_pickup_locker
+                    END = ? AND status = 'parcel_in_transportation';
+                `;
+            const [result] = yield dataBase_1.default.promise().query(query, [lockerNumber]);
+            const idParcels = result.map(row => row.id_parcel);
+            return idParcels;
         }
         catch (e) {
             console.error(e.message);
-            return `Error from cabinet model: ${e.message}`;
+            return `Error from parcel model: ${e.message}`;
         }
     })
 };
-exports.default = cabinet;
+exports.default = parcel;
