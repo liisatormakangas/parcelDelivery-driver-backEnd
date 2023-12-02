@@ -13,13 +13,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const dropoff_parcel_model_1 = __importDefault(require("../models/dropoff_parcel_model"));
+const parcel_model_1 = __importDefault(require("../models/parcel_model"));
 const router = express_1.default.Router();
 //Get list of free cabinets for a selected locker location
 router.get('/transportParcels/:number', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const lockerNumber = parseInt(req.params.number);
     try {
-        const cabinets = yield dropoff_parcel_model_1.default.getTransportedParcels(lockerNumber);
+        const cabinets = yield parcel_model_1.default.getTransportedParcels(lockerNumber);
         res.status(200).json(cabinets);
     }
     catch (e) {

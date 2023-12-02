@@ -14,6 +14,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const dataBase_1 = __importDefault(require("../dataBase"));
 const cabinet = {
+    // Get all cabinets
+    getAllCabinets: (lockerNumber) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const query = `SELECT * FROM locker WHERE locker_number = ?`;
+            const result = yield dataBase_1.default.promise().query(query, [lockerNumber]);
+            return result[0];
+        }
+        catch (e) {
+            console.error(e.message);
+            return `Error from cabinet model: ${e.message}`;
+        }
+    }),
     // Get list of free cabinet_ids for a selected locker location
     getAllFreeCabinets: function (lockerNumber) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -47,6 +59,32 @@ const cabinet = {
                 const cabinetNumbers = result.map(row => row.cabinet_number);
                 console.log("Cabinet Numbers:", cabinetNumbers);
                 return cabinetNumbers;
+            }
+            catch (e) {
+                console.error(e.message);
+                return `Error from cabinet model: ${e.message}`;
+            }
+        });
+    },
+    // convert locker number to locker id when give cabinet number
+    getCabinetIdByNumber: function (lockerNumber, cabinetNumber) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const query = `
+                SELECT id_cabinet
+                FROM locker
+                WHERE locker_number = ? AND cabinet_number = ?;
+            `;
+                const [result] = yield dataBase_1.default.promise().query(query, [lockerNumber, cabinetNumber]);
+                if (result.length > 0) {
+                    // Return the cabinet ID if found
+                    return result[0].id_cabinet;
+                }
+                else {
+                    // Cabinet not found for the given locker and cabinet numbers
+                    console.error('Cabinet not found:', lockerNumber, cabinetNumber);
+                    return null;
+                }
             }
             catch (e) {
                 console.error(e.message);
