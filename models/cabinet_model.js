@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const dataBase_1 = __importDefault(require("../dataBase"));
 const cabinet = {
-    // Get list of free cabinets for a selected locker location
+    // Get list of cabinets for a selected locker location
     getAllCabinets: (lockerNumber) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const query = `SELECT * FROM locker WHERE locker_number = ?`;
@@ -25,6 +25,30 @@ const cabinet = {
             console.error(e.message);
             return `Error from cabinet model: ${e.message}`;
         }
-    })
+    }),
+    //Get all cabinets in selected parcel locker waiting for delivery (has_dropoff_parcel)
+    getDropoffCabinets: (lockerNumber) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const query = `SELECT * FROM locker WHERE locker_number = ? AND cabinet_status = 'has_dropoff_parcel'`;
+            const result = yield dataBase_1.default.promise().query(query, [lockerNumber]);
+            return result[0];
+        }
+        catch (e) {
+            console.error(e.message);
+            return `Error from cabinet model: ${e.message}`;
+        }
+    }),
+    //Change cabinet status "free" and parcel_id "NULL" based on id_cabinet
+    freeCabinet: (cabinetId) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const query = `UPDATE locker SET cabinet_status = 'free', parcel_id = NULL WHERE id_cabinet = ?`;
+            const result = yield dataBase_1.default.promise().query(query, [cabinetId]);
+            return { success: true, message: 'Cabinet freed successfully' };
+        }
+        catch (e) {
+            console.error(e.message);
+            return { success: false, message: `Error from cabinet model: ${e.message}` };
+        }
+    }),
 };
 exports.default = cabinet;
