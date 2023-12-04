@@ -41,6 +41,19 @@ const cabinet = {
             return { success: false, message: `Error from cabinet model: ${e.message}` };
         }
     },
+    // get locker numbers with free cabinets
+    getFreeLockers: async () => {
+        try {
+            const query = `SELECT DISTINCT locker_number FROM locker WHERE cabinet_status = 'free'`;
+            const result = await connection.promise().query<RowDataPacket[]>(query);
+
+            return result[0];
+        }
+        catch (e: any) {
+            console.error(e.message);
+            return `Error from cabinet model: ${e.message}`;
+        }
+    },
 
 };
 

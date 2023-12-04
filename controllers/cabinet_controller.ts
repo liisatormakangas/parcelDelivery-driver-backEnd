@@ -42,6 +42,17 @@ router.put('/freeCabinet', async (req, res) => {
         res.status(500).send("Server error from cabinet controller");
     }
 });
+// get locker numbers with free cabinets
+router.get('/freeLockers', async (req, res) => {
+    try {
+        const lockers = await cabinet.getFreeLockers();
+        res.status(200).json(lockers);
+    }
+    catch (e: any) {
+        console.error(e.message);
+        res.status(500).send("Server error from cabinet controller");
+    }
+});
 
 
 export default router;

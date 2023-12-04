@@ -39,6 +39,7 @@ const dropoff = {
             throw e;
         }
     },
+    // update parcel table with alternative pickup locker number
     updateParcelWithNewLocker: async function(parcelId: number, lockerNumber: number) {
         try {
             const query = `

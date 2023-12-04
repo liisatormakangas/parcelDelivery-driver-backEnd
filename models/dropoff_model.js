@@ -46,6 +46,7 @@ const dropoff = {
             throw e;
         }
     }),
+    // update parcel table with alternative pickup locker number
     updateParcelWithNewLocker: function (parcelId, lockerNumber) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

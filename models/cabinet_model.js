@@ -50,5 +50,17 @@ const cabinet = {
             return { success: false, message: `Error from cabinet model: ${e.message}` };
         }
     }),
+    // get locker numbers with free cabinets
+    getFreeLockers: () => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const query = `SELECT DISTINCT locker_number FROM locker WHERE cabinet_status = 'free'`;
+            const result = yield dataBase_1.default.promise().query(query);
+            return result[0];
+        }
+        catch (e) {
+            console.error(e.message);
+            return `Error from cabinet model: ${e.message}`;
+        }
+    }),
 };
 exports.default = cabinet;
