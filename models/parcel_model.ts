@@ -25,9 +25,10 @@ const parcel = {
             return `Error from parcel model: ${e.message}`;
         }
     },
-    //Update parcel status to "parcel_in_transportation" and pin_code to "NULL" based on id_parcel
+    // Update parcel status to "parcel_in_transportation" and pin_code to "NULL" based on id_parcel
     modifyParcelToTransport: async (parcelId: number) => {
         try {
+            // update parcel status to "parcel_in_transportation" and pin_code to "NULL" based on id_parcel
             const query = `UPDATE parcel SET status = 'parcel_in_transportation', pin_code = NULL WHERE id_parcel = ?`;
             const result = await connection.promise().query<RowDataPacket[]>(query, [parcelId]);
 
@@ -38,6 +39,7 @@ const parcel = {
             return { success: false, message: `Error from parcel model: ${e.message}` };
         }
     }
+ 
 };
 
 export default parcel;

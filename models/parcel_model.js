@@ -34,9 +34,10 @@ const parcel = {
             return `Error from parcel model: ${e.message}`;
         }
     }),
-    //Update parcel status to "parcel_in_transportation" and pin_code to "NULL" based on id_parcel
+    // Update parcel status to "parcel_in_transportation" and pin_code to "NULL" based on id_parcel
     modifyParcelToTransport: (parcelId) => __awaiter(void 0, void 0, void 0, function* () {
         try {
+            // update parcel status to "parcel_in_transportation" and pin_code to "NULL" based on id_parcel
             const query = `UPDATE parcel SET status = 'parcel_in_transportation', pin_code = NULL WHERE id_parcel = ?`;
             const result = yield dataBase_1.default.promise().query(query, [parcelId]);
             return { success: true, message: 'Parcel status changed successfully' };
