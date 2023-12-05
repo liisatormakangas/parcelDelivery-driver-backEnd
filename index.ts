@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 
 import cabinetRouter from './controllers/cabinet_controller';
 import parcelRouter from './controllers/parcel_controller';
+import robotRouter from './controllers/robot_controller';
 
 dotenv.config();
 const PORT = 3001;
@@ -14,6 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/cabinet', cabinetRouter);
 app.use('/parcel', parcelRouter);
+app.use('/robot', robotRouter);
 
 app.listen(PORT, () => {
     console.log(`App listening on port ${PORT}`);
