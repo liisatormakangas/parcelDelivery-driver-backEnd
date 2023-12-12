@@ -10,7 +10,7 @@ const cabinet_controller_1 = __importDefault(require("./controllers/cabinet_cont
 const parcel_controller_1 = __importDefault(require("./controllers/parcel_controller"));
 const robot_controller_1 = __importDefault(require("./controllers/robot_controller"));
 dotenv_1.default.config();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
