@@ -7,7 +7,7 @@ import parcelRouter from './controllers/parcel_controller';
 import robotRouter from './controllers/robot_controller';
 
 dotenv.config();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 const app: Express = express();
 app.use(cors());
 app.use(express.json());
