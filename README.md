@@ -20,14 +20,14 @@ This application simulates the touch screen device at a parcel locker location f
 ## Parcel Generator "Robot" Backend Application
 This is a backend application which is responsible for automatically generating new parcel deliveries for randomly selected consumer users. The Parcel Generator “Robot” simulates the process of creating new parcels for the driver to deliver, thus initiating the delivery process.
 ## Description of the technologies used in the project
-### Front-end part for all applications
-- Node.js React framework and TypeScript
+### Front-end part for Touch Screen and User Applications
+- React framework and TypeScript
 - Bootstrap CSS framework and Font Awesome icons for styling
 - JWT (JSON Web Tokens) for authentication across HTTP requests
 - Leaflet opensource JS map library
 
 ### Delivery Truck Driver GUI Application - frontend
-- Next.js React framework and TypeScript
+- Next.js (React-based) framework and TypeScript
 - Tailwind open-source CSS framework for styling
 - Leaflet JavaScript library to create an interactive map
 
